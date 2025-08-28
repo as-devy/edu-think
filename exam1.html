@@ -1,0 +1,256 @@
+
+    <title>Camtasia QUIZ </title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            display: none;
+            margin: 20px 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+        .question.active {
+            display: block;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+        .loading.active {
+            display: block;
+            animation: slideIn 2s ease-in-out infinite;
+        }
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateY(-10px); }
+            50% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(10px); }
+        }
+        .question h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 5px 0;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #timer {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 10px;
+            color: #ff0000;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .question h2 {
+                font-size: 16px;
+            }
+            button {
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Camtasia QUIZ </h1>
+        <form id="quizForm">
+            <!-- Questions will be dynamically added here -->
+        </form>
+        <div class="loading" id="loading">Loading next question...</div>
+        <button id="nextBtn">Next</button>
+        <div class="result" id="result"></div>
+    </div>
+      
+    <script>
+		const questions = [
+    { question: "What is Camtasia primarily used for?", options: ["Screen recording and video editing", "Photo editing", "Web development"], answer: 0 },
+    { question: "Which file format can you export videos in using Camtasia?", options: ["MP4", "DOCX", "TXT"], answer: 0 },
+    { question: "How can you add interactivity to a Camtasia video?", options: ["By adding quizzes or hotspots", "By exporting to PDF", "By using the blur effect"], answer: 0 },
+    { question: "Which feature in Camtasia allows you to automatically follow the cursor during a recording?", options: ["Cursor Effects", "SmartFocus", "Zoom and Pan"], answer: 1 },
+    { question: "What is the default frame rate for screen recordings in Camtasia?", options: ["30 FPS", "24 FPS", "60 FPS"], answer: 0 },
+    { question: "Which option in Camtasia allows you to merge two media clips?", options: ["Group", "Combine", "Overlay"], answer: 0 },
+    { question: "How can you maintain aspect ratio when resizing media in Camtasia?", options: ["Hold the Shift key", "Hold the Alt key", "Hold the Ctrl key"], answer: 0 },
+    { question: "What is the purpose of the Stitching feature in Camtasia?", options: ["Merge split clips into one", "Add transitions between clips", "Synchronize audio with video"], answer: 0 },
+    { question: "Which Camtasia feature is used to apply a fade-in or fade-out effect to audio?", options: ["Audio Fade", "Zoom and Pan", "Timeline Adjustment"], answer: 0 },
+    { question: "What is the maximum duration for a single Camtasia recording?", options: ["2 hours", "1 hour", "Unlimited"], answer: 2 },
+    { question: "What is the purpose of proxy media in Camtasia?", options: ["Improve editing performance by using lower resolution copies", "Convert videos to MP4 format", "Synchronize audio and video"], answer: 0 },
+    { question: "Which tool in Camtasia allows you to highlight a specific area of the screen?", options: ["Spotlight", "Annotations", "Cursor Effects"], answer: 0 },
+    { question: "What does the Ripple Delete feature do in Camtasia?", options: ["Deletes a clip and shifts subsequent media to fill the gap", "Deletes all media in a timeline track", "Deletes unused media in the library"], answer: 0 },
+    { question: "How can you export a custom theme in Camtasia?", options: ["Use the Manage Themes menu", "Right-click on the timeline", "Drag the theme to the Library"], answer: 0 },
+    { question: "Which Camtasia effect is used to animate text or media objects?", options: ["Behaviors", "Annotations", "Zoom and Pan"], answer: 0 },
+    { question: "How can you align multiple objects precisely in Camtasia?", options: ["Use the Alignment Guides", "Manually adjust the Canvas", "Enable SmartFocus"], answer: 0 },
+    { question: "Which option in Camtasia allows you to export directly to YouTube?", options: ["Share menu", "Export menu", "Canvas settings"], answer: 0 },
+    { question: "What is the purpose of the Track Matte feature in Camtasia?", options: ["Create transparency effects using shapes", "Add custom annotations", "Apply green screen effects"], answer: 0 },
+    { question: "How can you add a watermark to your video in Camtasia?", options: ["Overlay an image on the timeline", "Use the Canvas tools", "Adjust the zoom settings"], answer: 0 },
+    { question: "Which format does Camtasia use for recording raw video files?", options: ["TREC", "MP4", "AVI"], answer: 0 },
+    { question: "How can you fine-tune animation paths in Camtasia?", options: ["Drag keyframes in the timeline", "Edit the canvas size", "Change the file format"], answer: 0 },
+    { question: "Which shortcut allows you to split a clip on the timeline in Camtasia?", options: ["Ctrl+T", "Ctrl+X", "Ctrl+S"], answer: 0 },
+    { question: "What is the main difference between SmartFocus and manual Zoom and Pan in Camtasia?", options: ["SmartFocus is automated; manual allows full control", "SmartFocus is only for audio", "Manual is faster but less accurate"], answer: 0 },
+    { question: "Which advanced feature in Camtasia is used for color correction?", options: ["Color Adjustment", "Spotlight", "Stitching"], answer: 0 },
+    { question: "What does the Batch Production feature do in Camtasia?", options: ["Exports multiple projects at once", "Combines all tracks into one", "Synchronizes audio tracks"], answer: 0 },
+    { question: "How can you create custom callouts in Camtasia?", options: ["Edit shapes and text in the Annotations panel", "Use the Library only", "Enable the Clip Speed tool"], answer: 0 },
+    { question: "Which Camtasia feature allows you to record audio from a separate device?", options: ["Audio Input Selector", "Audio Mixer", "Voice Narration"], answer: 0 },
+    { question: "How can you reverse a clip in Camtasia?", options: ["Use an external video editor (not natively supported)", "Click the Reverse Clip option", "Apply the Clip Speed tool"], answer: 0 },
+    { question: "What is the recommended resolution for Camtasia projects to avoid quality loss?", options: ["Match the recording resolution", "1080p", "720p"], answer: 0 }
+];
+    
+const quizForm = document.getElementById("quizForm");
+const resultDiv = document.getElementById("result");
+const nextBtn = document.getElementById("nextBtn");
+const loadingDiv = document.getElementById("loading");
+const timerDiv = document.getElementById("timer");
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTimer(duration, display, callback) {
+    let timer = duration, seconds;
+    const interval = setInterval(() => {
+        seconds = parseInt(timer % 60, 10);
+        display.textContent = `Time left: ${seconds}s`;
+
+        if (--timer < 0) {
+            clearInterval(interval);
+            callback();
+        }
+    }, 1000);
+}
+
+questions.forEach((q, index) => {
+    const questionDiv = document.createElement("div");
+    questionDiv.classList.add("question");
+    if (index === 0) questionDiv.classList.add("active");
+
+    const questionTitle = document.createElement("h2");
+    questionTitle.textContent = `${index + 1}. ${q.question}`;
+    questionDiv.appendChild(questionTitle);
+
+    const optionsList = document.createElement("ul");
+    optionsList.classList.add("options");
+
+    q.options.forEach((option, i) => {
+        const optionItem = document.createElement("li");
+
+        const optionInput = document.createElement("input");
+        optionInput.type = "radio";
+        optionInput.name = `question${index}`;
+        optionInput.value = i;
+
+        const optionLabel = document.createElement("label");
+        optionLabel.textContent = option;
+
+        optionItem.appendChild(optionInput);
+        optionItem.appendChild(optionLabel);
+        optionsList.appendChild(optionItem);
+    });
+
+    questionDiv.appendChild(optionsList);
+    quizForm.appendChild(questionDiv);
+});
+
+nextBtn.addEventListener("click", () => {
+    const currentQuestion = document.querySelector(".question.active");
+    const selectedOption = currentQuestion.querySelector("input[type=radio]:checked");
+
+    if (!selectedOption) {
+        alert("Please select an answer before proceeding.");
+        return;
+    }
+
+    const selectedValue = parseInt(selectedOption.value);
+    if (selectedValue === questions[currentQuestionIndex].answer) {
+        score++;
+    }
+
+    currentQuestion.classList.remove("active");
+    loadingDiv.classList.add("active");
+    nextBtn.style.display = "none";
+
+    setTimeout(() => {
+        loadingDiv.classList.remove("active");
+        nextBtn.style.display = "block";
+
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex < questions.length) {
+            const nextQuestion = quizForm.children[currentQuestionIndex];
+            nextQuestion.classList.add("active");
+
+            startTimer(15, timerDiv, () => {
+                alert("Time's up for this question!");
+                nextBtn.click();
+            });
+        } else {
+            nextBtn.style.display = "none";
+            const percentage = (score / questions.length) * 100;
+            resultDiv.textContent = `You scored ${score} out of ${questions.length} (${percentage.toFixed(2)}%)`;
+
+            if (percentage >= 75) {
+                const certificateLink = document.createElement("a");
+                certificateLink.href = "https://www.canva.com/design/DAGa2m-YADk/i9qo_BN9nnO204OfZx0sHA/edit";
+                certificateLink.textContent = "Click here to get your certificate!";
+                certificateLink.target = "_blank";
+                resultDiv.appendChild(certificateLink);
+            }
+        }
+    }, 2000);
+});
+
+// Start the timer for the first question
+startTimer(15, timerDiv, () => {
+    alert("Time's up for this question!");
+    nextBtn.click();
+});
+
+	</script>
+</html>

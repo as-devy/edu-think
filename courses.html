@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 
+    - primary meta tag
+  -->
+  <title>EduWeb - أفضل برنامج للالتحاق بالتبادل الدراسي</title>
+  <meta name="title" content="EduWeb - أفضل برنامج للالتحاق بالتبادل الدراسي">
+  <meta name="description" content="هذا قالب HTML تعليمي مقدم من codewithsadee">
+
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800&family=Poppins:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- 
+    - preload images
+  -->
+  <link rel="preload" as="image" href="./assets/images/hero-bg.svg">
+  <link rel="preload" as="image" href="./assets/images/hero-banner-1.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-banner-2.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-shape-1.svg">
+  <link rel="preload" as="image" href="./assets/images/hero-shape-2.png">
+
+</head>
+
+<body id="top" dir="rtl">
+
+  <!-- 
+    - #HEADER
+  -->
+
+  <header class="header" data-header>
+    <div class="container">
+
+      <a href="#" class="logo">
+        <img src="./assets/images/logo.svg" width="162" height="50" alt="شعار EduWeb">
+      </a>
+
+      <nav class="navbar" data-navbar>
+
+        <div class="wrapper">
+          <a href="#" class="logo">
+            <img src="./assets/images/logo.svg" width="162" height="50" alt="شعار EduWeb">
+          </a>
+
+          <button class="nav-close-btn" aria-label="إغلاق القائمة" data-nav-toggler>
+            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+          </button>
+        </div>
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <a href="index.html" class="navbar-link" data-nav-link>الرئيسية</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="about.html" class="navbar-link" data-nav-link>من نحن</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="courses.html" class="navbar-link" data-nav-link>الدورات</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="blog.html" class="navbar-link" data-nav-link>المدونة</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="cc.html" class="navbar-link" data-nav-link>اتصل بنا</a>
+          </li>
+
+        </ul>
+
+      </nav>
+
+      <div class="header-actions">
+        <button class="header-action-btn" aria-label="فتح القائمة" data-nav-toggler>
+          <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+        </button>
+      </div>
+
+      <div class="overlay" data-nav-toggler data-overlay></div>
+
+    </div>
+  </header>
+
+
+  <style>
+    /* From Uiverse.io by doniaskima */
+    .btn-53,
+    .btn-53 *,
+    .btn-53 :after,
+    .btn-53 :before,
+    .btn-53:after,
+    .btn-53:before {
+      border: 0 solid;
+      box-sizing: border-box;
+    }
+
+    .btn-53 {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-appearance: button;
+      background-color: #000;
+      background-image: none;
+      color: #fff;
+      cursor: pointer;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+        Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      font-size: 100%;
+      line-height: 1.5;
+      margin: 0;
+      -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+      padding: 0;
+    }
+
+    .btn-53:disabled {
+      cursor: default;
+    }
+
+    .btn-53:-moz-focusring {
+      outline: auto;
+    }
+
+    .btn-53 svg {
+      display: block;
+      vertical-align: middle;
+    }
+
+    .btn-53 [hidden] {
+      display: none;
+    }
+
+    .btn-53 {
+      border: 1px solid;
+      border-radius: 999px;
+      box-sizing: border-box;
+      display: block;
+      font-weight: 900;
+      overflow: hidden;
+      padding: 1.2rem 3rem;
+      position: relative;
+      text-transform: uppercase;
+    }
+
+    .btn-53 .original {
+      background: #fff;
+      color: #000;
+      display: grid;
+      inset: 0;
+      place-content: center;
+      position: absolute;
+      transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1);
+    }
+
+    .btn-53:hover .original {
+      transform: translateY(100%);
+    }
+
+    .btn-53 .letters {
+      display: inline-flex;
+    }
+
+    .btn-53 span {
+      opacity: 0;
+      transform: translateY(-15px);
+      transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1), opacity 0.2s;
+    }
+
+    .btn-53 span:nth-child(2n) {
+      transform: translateY(15px);
+    }
+
+    .btn-53:hover span {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn-53:hover span:nth-child(2) {
+      transition-delay: 0.1s;
+    }
+
+    .btn-53:hover span:nth-child(3) {
+      transition-delay: 0.2s;
+    }
+
+    .btn-53:hover span:nth-child(4) {
+      transition-delay: 0.3s;
+    }
+
+    .btn-53:hover span:nth-child(5) {
+      transition-delay: 0.4s;
+    }
+
+    .btn-53:hover span:nth-child(6) {
+      transition-delay: 0.5s;
+    }
+  </style>
+
+  <main>
+    <article>
+      <section class="section course" id="courses" aria-label="course">
+        <div class="container">
+
+          <p class="section-subtitle"> </p>
+
+          <h2 class="h2 section-title">اختر دورة لتبدأ الآن</h2>
+
+          <ul class="grid-list">
+
+            <li>
+              <div class="course-card">
+
+                <figure class="card-banner img-holder" style="--width: 370; --height: 220;">
+                  <img src="./assets/images/course-1.jpg" width="370" height="220" loading="lazy"
+                    alt="بناء مواقع ويب تفاعلية باستخدام HTML و CSS" class="img-cover">
+                </figure>
+
+                <div class="abs-badge">
+                  <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+
+                  <span class="span">3 أسابيع</span>
+                </div>
+
+                <div class="card-content">
+
+                  <span class="badge">مبتدئ</span>
+
+                  <h3 class="h3">
+                    <a href="https://www.youtube.com/watch?v=Pwatx1n1Ws0&ab_channel=YehiaTech%D9%8A%D8%AD%D9%8A%D9%89%D8%AA%D9%83"
+                      class="card-title">بناء مواقع ويب تفاعلية باستخدام HTML و CSS</a>
+                  </h3>
+
+                  <div class="wrapper">
+
+                    <div class="rating-wrapper">
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                    </div>
+
+                    <p class="rating-text">(5.0/7 تقييم)</p>
+
+                  </div>
+
+                  <data class="price" value="0">مجاني</data>
+
+                  <ul class="card-meta-list">
+
+                    <li class="card-meta-item">
+                      <ion-icon name="library-outline" aria-hidden="true"></ion-icon>
+
+                      <span class="span">8 دروس</span>
+                    </li>
+
+                    <li class="card-meta-item">
+                      <ion-icon name="people-outline" aria-hidden="true"></ion-icon>
+
+                      <span class="span">20 طالب</span>
+                    </li>
+                    <div class="hh">
+                      <a href="exam.html">
+                        <button class="btn-53">
+                          <div class="original">exam</div>
+                          <div class="letters">
+
+                            <span>T</span>
+                            <span>E</span>
+                            <span>S</span>
+                            <span>T</span>
+
+
+                          </div>
+                        </button>
+
+                      </a>
+                    </div>
+                  </ul>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="course-card">
+
+                <figure class="card-banner img-holder" style="--width: 370; --height: 220;">
+                  <img src="./assets/images/course-2.jpg" width="370" height="220" loading="lazy"
+                    alt="دورة جافا للمطورين" class="img-cover">
+                </figure>
+
+                <div class="abs-badge">
+                  <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+
+                  <span class="span">8 أسابيع</span>
+                </div>
+
+                <div class="card-content">
+
+                  <span class="badge">متقدم</span>
+
+                  <h3 class="h3">
+                    <a href="https://www.youtube.com/watch?v=ezOvr_qK3f4&list=PLCi9_wQUeSMU9lnFeub4Vb27S5TnwesCy&ab_channel=BarmajaOnline-%D8%A8%D8%B1%D9%85%D8%AC%D8%A9%D8%A3%D9%88%D9%86%D9%84%D8%A7%D9%8A%D9%86"
+                      class="card-title">دورة جافا للمطورين</a>
+                  </h3>
+
+                  <div class="wrapper">
+
+                    <div class="rating-wrapper">
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                    </div>
+
+                    <p class="rating-text">(4.5 /9 تقييم)</p>
+
+                  </div>
+
+                  <data class="price" value="0">مجاني</data>
+
+                  <ul class="card-meta-list">
+
+                    <li class="card-meta-item">
+                      <ion-icon name="library-outline" aria-hidden="true"></ion-icon>
+
+                      <span class="span">15 درس</span>
+                    </li>
+
+                    <li class="card-meta-item">
+                      <ion-icon name="people-outline" aria-hidden="true"></ion-icon>
+
+                      <span class="span">35 طالب</span>
+                    </li>
+                    <a href="exam3.html">
+                      <button class="btn-53">
+                        <div class="original">exam</div>
+                        <div class="letters">
+
+                          <span>T</span>
+                          <span>E</span>
+                          <span>S</span>
+                          <span>T</span>
+
+
+                        </div>
+                      </button>
+
+                    </a>
+                  </ul>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="course-card">
+
+                <figure class="card-banner img-holder" style="--width: 370; --height: 220;">
+                  <img src="./assets/images/course-3.jpg" width="370" height="220" loading="lazy"
+                    alt="الدورة الكاملة لـ Camtasia لصناع المحتوى" class="img-cover">
+                </figure>
+
+                <div class="abs-badge">
+                  <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+
+                  <span class="span">3 أسابيع</span>
+                </div>
+
+                <div class="card-content">
+
+                  <span class="badge">متوسط</span>
+
+                  <h3 class="h3">
+                    <a href="https://www.youtube.com/watch?v=ZnIb9uI4YK0&ab_channel=ProgramsCafe"
+                      class="card-title">الدورة الكاملة لـ Camtasia لصناع المحتوى</a>
+                  </h3>
+
+                  <div class="wrapper">
+
+                    <div class="rating-wrapper">
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                    </div>
+
+                    <p class="rating-text">(4.9 /7 تقييم)</p>
+
+                  </div>
+
+                  <data class="price" value="0">مجاني</data>
+
+                  <ul class="card-meta-list">
+
+                    <li class="card-meta-item">
+                      <ion-icon name="library-outline" aria-hidden="true"></ion-icon>
+
+                      <span class="span">13 درس</span>
+                    </li>
+
+                    <li class="card-meta-item">
+                      <ion-icon name="people-outline" aria-hidden="true"></ion-icon>
+
+                      <span class="span">18 طالب</span>
+                    </li>
+                    <div class="hh">
+                      <a href="exam1.html">
+                        <button class="btn-53">
+                          <div class="original">exam</div>
+                          <div class="letters">
+
+                            <span>T</span>
+                            <span>E</span>
+                            <span>S</span>
+                            <span>T</span>
+
+
+                          </div>
+                        </button>
+
+                      </a>
+                    </div>
+                  </ul>
+
+                </div>
+
+              </div>
+            </li>
+
+          </ul>
+
+
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <script src="./assets/js/script.js" defer></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
