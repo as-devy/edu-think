@@ -12,7 +12,7 @@
             gap: .8rem;
         }
         .header .logo img{
-            width: 60px;
+            width: 50px;
         }
     </style>
     <header class="header" data-header>
@@ -38,7 +38,7 @@
                 <ul class="navbar-list">
 
                     <li class="navbar-item">
-                        <a href="index.html" class="navbar-link" data-nav-link>الرئيسية</a>
+                        <a href="index.php" class="navbar-link" data-nav-link>الرئيسية</a>
                     </li>
 
                     <li class="navbar-item">

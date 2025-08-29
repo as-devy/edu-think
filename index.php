@@ -56,7 +56,7 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 
 <body id="top" dir="rtl">
-    <?= require_once "./layout/header.php" ?>
+    <?php require_once "./layout/header.php" ?>
 
     <main>
         <article>

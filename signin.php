@@ -3,7 +3,7 @@ session_start();
 
 if (isset($_SESSION['user_id'])) {
     // Redirect to signin if not logged in
-    header("Location: index.html");
+    header("Location: index.php");
     exit();
 }
 
@@ -64,6 +64,7 @@ $conn->close();
     - رابط CSS المخصص
   -->
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/auth.css">
 
     <!-- 
     - خطوط جوجل
@@ -72,150 +73,49 @@ $conn->close();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-   <?= require_once "./layout/header.php" ?>
 
 
-    <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #f4f4f4;
-            padding: 0;
-        }
-
-        .form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-width: 350px;
-            padding: 20px;
-            border-radius: 20px;
-            background-color: #1a1a1a;
-            color: #fff;
-            border: 1px solid #333;
-            margin: 0 auto;
-        }
-
-        .title {
-            font-size: 28px;
-            font-weight: 600;
-            letter-spacing: -1px;
-            display: flex;
-            align-items: center;
-            padding-right: 30px;
-            color: #00bfff;
-        }
-
-        .message,
-        .signin {
-            font-size: 14.5px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .signin {
-            text-align: center;
-        }
-
-        .signin a {
-            color: #00bfff;
-            text-decoration: none;
-        }
-
-        .signin a:hover {
-            text-decoration: underline;
-        }
-
-        .form label {
-            position: relative;
-        }
-
-        .form label .input {
-            background-color: #333;
-            color: #fff;
-            width: 100%;
-            padding: 20px 10px 10px 10px;
-            outline: 0;
-            border: 1px solid rgba(105, 105, 105, 0.397);
-            border-radius: 10px;
-        }
-
-        .form label .input+span {
-            color: rgba(255, 255, 255, 0.5);
-            position: absolute;
-            right: 10px;
-            top: 12.5px;
-            font-size: 0.9em;
-            cursor: text;
-            transition: 0.3s ease;
-        }
-
-        .form label .input:placeholder-shown+span {
-            top: 22.5px;
-            font-size: 0.9em;
-        }
-
-        .form label .input:focus+span,
-        .form label .input:valid+span {
-            color: #00bfff;
-            top: 0px;
-            font-size: 0.7em;
-            font-weight: 600;
-        }
-
-        .submit {
-            border: none;
-            outline: none;
-            padding: 10px;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 16px;
-            transform: .3s ease;
-            background-color: #00bfff;
-            cursor: pointer;
-        }
-
-        .submit:hover {
-            background-color: #00bfff96;
-        }
-
-        @media (min-width: 600px) {
-            .form {
-                max-width: 500px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .form {
-                max-width: 600px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .form {
-                max-width: 700px;
-            }
-        }
-    </style>
 </head>
 
 <body id="top">
-    <form class="form" action="/" method="POST">
-        <p class="title">تسجيل الدخول</p>
-        <p class="message">أدخل بياناتك لتسجيل الدخول إلى حسابك.</p>
+    <?php require_once "./layout/header.php" ?>
 
-        <label>
-            <input class="input" type="email" name="email" placeholder="البريد الإلكتروني" required>
-        </label>
+    <main>
+        <div class="main_container">
+            <div class="auth_overlay">
 
-        <label>
-            <input class="input" type="password" name="password" placeholder="كلمة المرور" required>
-        </label>
+                <div class="content" dir="ltr">
+                    <a href="#" class="logo">
+                        <img src="./assets/images/logo.png" width="162" height="50" alt="Logo">
+                        <h2>Edu-Think</h2>
+                    </a>
+                    <p>Edu-Think is your ultimate study buddy—an online platform that blends technology with education for learners of all ages. With interactive tools, flexible study options, and easy access to resources, it makes learning engaging and accessible anytime, anywhere. Join Edu-Think to enhance your skills, achieve academic goals, and enjoy a smarter way to learn.</p>
+                    <h3 style="color: #cececeff;">Join Us Now.</h3>
+                </div>
+            </div>
 
-        <button class="submit">تسجيل الدخول</button>
+            <div class="form_container">
+                <form class="form" action="/" method="POST">
+                    <p class="title">تسجيل الدخول</p>
+                    <p class="message">أدخل بياناتك لتسجيل الدخول إلى حسابك.</p>
 
-        <p class="signin"> <a href="for.html">إعادة تعيين كلمة المرور</a></p>
+                    <label>
+                        <input class="input" type="email" name="email" placeholder="البريد الإلكتروني" required>
+                    </label>
 
-        <p class="signin"> <a href="signup.html">إنشاء حساب جديد</a></p>
-    </form>
+                    <label>
+                        <input class="input" type="password" name="password" placeholder="كلمة المرور" required>
+                    </label>
+
+                    <button class="submit">تسجيل الدخول</button>
+
+                    <p class="signin"> <a href="for.html">إعادة تعيين كلمة المرور</a></p>
+
+                    <p class="signin"> <a href="register.php">إنشاء حساب جديد</a></p>
+                </form>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>

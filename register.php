@@ -3,17 +3,18 @@ session_start();
 
 if (isset($_SESSION['user_id'])) {
     // Redirect to signin if not logged in
-    header("Location: index.html");
+    header("Location: index.php");
     exit();
 }
 
 require_once "db.php"; // include the database connection
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $last_name  = $_POST['last_name'];
+    $email      = $_POST['email'];
+    $password   = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
     if ($password !== $confirm_password) {
@@ -28,7 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("ssss", $first_name, $last_name, $email, $hashed_password);
 
     if ($stmt->execute()) {
-        header("Location: signin.php");
+        // ✅ Get the newly inserted user ID
+        $user_id = $conn->insert_id;
+
+        // ✅ Store it in the session
+        $_SESSION['user_id'] = $user_id;
+
+        // Redirect after signup
+        header("Location: index.php");
         exit();
     } else {
         echo "Error: " . $stmt->error;
@@ -66,6 +74,7 @@ $conn->close();
     - custom css link
   -->
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/auth.css">
 
     <!-- 
     - google font link
@@ -93,233 +102,47 @@ $conn->close();
     - #HEADER
   -->
 
-    <header class="header" data-header>
-        <div class="container">
-
-            <a href="#" class="logo">
-                <img src="./assets/images/logo.svg" width="162" height="50" alt="شعار EduWeb">
-            </a>
-
-            <nav class="navbar" data-navbar>
-
-                <div class="wrapper">
-                    <a href="#" class="logo">
-                        <img src="./assets/images/logo.svg" width="162" height="50" alt="شعار EduWeb">
-                    </a>
-
-                    <button class="nav-close-btn" aria-label="إغلاق القائمة" data-nav-toggler>
-                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
-                    </button>
-                </div>
-
-                <ul class="navbar-list">
-
-                    <li class="navbar-item">
-                        <a href="index.html" class="navbar-link" data-nav-link>الرئيسية</a>
-                    </li>
-
-                    <li class="navbar-item">
-                        <a href="about.html" class="navbar-link" data-nav-link>من نحن</a>
-                    </li>
-
-                    <li class="navbar-item">
-                        <a href="courses.html" class="navbar-link" data-nav-link>الدورات</a>
-                    </li>
-
-                    <li class="navbar-item">
-                        <a href="blog.html" class="navbar-link" data-nav-link>المدونة</a>
-                    </li>
-
-                    <li class="navbar-item">
-                        <a href="cc.html" class="navbar-link" data-nav-link>اتصل بنا</a>
-                    </li>
-
-                </ul>
-
-            </nav>
-
-            <div class="header-actions">
-                <button class="header-action-btn" aria-label="فتح القائمة" data-nav-toggler>
-                    <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
-                </button>
-            </div>
-
-            <div class="overlay" data-nav-toggler data-overlay></div>
-
-        </div>
-    </header>
-
-
-
-    <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #f4f4f4;
-            margin-top: 100px;
-            /* زيادة المسافة لإظهار الفورم */
-            padding: 0;
-        }
-
-        .form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-width: 350px;
-            padding: 20px;
-            border-radius: 20px;
-            margin: 20px auto;
-            background-color: #1a1a1a;
-            color: #fff;
-            border: 1px solid #333;
-        }
-
-        .title {
-            font-size: 28px;
-            font-weight: 600;
-            letter-spacing: -1px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            padding-right: 30px;
-            color: #00bfff;
-        }
-
-        .message,
-        .signin {
-            font-size: 14.5px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .signin {
-            text-align: center;
-        }
-
-        .signin a {
-            color: #00bfff;
-            text-decoration: none;
-        }
-
-        .signin a:hover {
-            text-decoration: underline;
-        }
-
-        .flex {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .form label {
-            position: relative;
-        }
-
-        .form label .input {
-            background-color: #333;
-            color: #fff;
-            width: 100%;
-            padding: 20px 10px 10px 10px;
-            outline: 0;
-            border: 1px solid rgba(105, 105, 105, 0.397);
-            border-radius: 10px;
-        }
-
-        .form label .input+span {
-            color: rgba(255, 255, 255, 0.5);
-            position: absolute;
-            right: 10px;
-            top: 12.5px;
-            font-size: 0.9em;
-            cursor: text;
-            transition: 0.3s ease;
-        }
-
-        .form label .input:placeholder-shown+span {
-            top: 22.5px;
-            font-size: 0.9em;
-        }
-
-        .form label .input:focus+span,
-        .form label .input:valid+span {
-            color: #00bfff;
-            top: 0px;
-            font-size: 0.7em;
-            font-weight: 600;
-        }
-
-        .submit {
-            border: none;
-            outline: none;
-            padding: 10px;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 16px;
-            transform: .3s ease;
-            background-color: #00bfff;
-            cursor: pointer;
-        }
-
-        .submit:hover {
-            background-color: #00bfff96;
-        }
-
-        @media (min-width: 600px) {
-            .flex {
-                flex-direction: row;
-            }
-
-            .form {
-                max-width: 500px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .form {
-                max-width: 600px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .form {
-                max-width: 700px;
-            }
-        }
-    </style>
-    </head>
+    <?php require_once "./layout/header.php" ?>
 
     <body id="top">
 
-        <form class="form" action="/" method="POST">
-            <p class="title">تسجيل جديد</p>
-            <p class="message">سجل الآن واحصل على وصول كامل إلى التطبيق.</p>
+        <main>
+            <div class="main_container">
+                <div class="auth_overlay">
 
-            <div class="flex">
-                <label>
-                    <input class="input" type="text" name="first_name" placeholder="الاسم الأول" required>
-                </label>
+                    <div class="content" dir="ltr">
+                        <a href="#" class="logo">
+                            <img src="./assets/images/logo.png" width="162" height="50" alt="Logo">
+                            <h2>Edu-Think</h2>
+                        </a>
+                        <p>Edu-Think is your ultimate study buddy—an online platform that blends technology with education for learners of all ages. With interactive tools, flexible study options, and easy access to resources, it makes learning engaging and accessible anytime, anywhere. Join Edu-Think to enhance your skills, achieve academic goals, and enjoy a smarter way to learn.</p>
+                        <h3 style="color: #cececeff;">Join Us Now.</h3>
+                    </div>
+                </div>
 
-                <label>
-                    <input class="input" type="text" name="last_name" placeholder="اسم العائلة" required>
-                </label>
+                <div class="form_container">
+                    <form class="form" action="" method="POST">
+                        <p class="title">تسجيل جديد</p>
+                        <p class="message">سجل الآن واحصل على وصول كامل إلى التطبيق.</p>
+
+                        <div class="flex">
+                            <input class="input" type="text" name="first_name" placeholder="الاسم الأول" required>
+
+                            <input class="input" type="text" name="last_name" placeholder="اسم العائلة" required>
+                        </div>
+
+                        <input class="input" type="email" name="email" placeholder="البريد الإلكتروني" required>
+                        <input class="input" type="password" name="password" placeholder="كلمة المرور" required>
+                        <input class="input" type="password" name="confirm_password" placeholder="تأكيد كلمة المرور" required>
+                        <button class="submit">انشاء الحساب</button>
+
+
+                        <p class="signin"> <a href="signin.php"> تسجيل الدخول</a></p>
+                    </form>
+                </div>
             </div>
+        </main>
 
-            <label>
-                <input class="input" type="email" name="email" placeholder="البريد الإلكتروني" required>
-            </label>
-
-            <label>
-                <input class="input" type="password" name="password" placeholder="كلمة المرور" required>
-            </label>
-
-            <label>
-                <input class="input" type="password" name="confirm_password" placeholder="تأكيد كلمة المرور" required>
-            </label>
-
-            <button class="submit">انشاء الحساب</button>
-
-
-            <p class="signin"> <a href="signin.html"> تسجيل الدخول</a></p>
-        </form>
-        </form>
         <script src="./assets/js/script.js" defer></script>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
