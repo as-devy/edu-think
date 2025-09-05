@@ -19,8 +19,53 @@ main .main_container {
 }
 
 main .main_container .form_container {
-    width: 50%;
+    width: 55%;
     margin: 0 20px;
+}
+
+main .main_container .form_container .steps {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    z-index: 999999;
+}
+
+/* main .main_container .form_container .steps::after {
+    content: '';
+    position: absolute;
+    right: 50%;
+    transform: translate(50%, -50%);
+    top: 32%;
+    width: 62%;
+    background-color: gray;
+    height: 1px;
+} */
+
+main .main_container .form_container .steps .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    opacity: .6;
+}
+
+main .main_container .form_container .steps .step.active {
+    opacity: 1;
+}
+
+main .main_container .form_container .steps .step .number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid gray;
+}
+
+main .main_container .form_container .steps .step.active .number {
+    background-color: #25d5b3;
+    color: #fff;
 }
 
 main .main_container .auth_overlay {
@@ -60,7 +105,7 @@ main .main_container .auth_overlay .content {
     color: #fff;
 }
 
-main .main_container .auth_overlay .content p{
+main .main_container .auth_overlay .content p {
     font-size: 15px;
     color: #ebebeb;
 }
@@ -98,11 +143,13 @@ main .main_container .logo img {
     font-size: 28px;
     font-weight: 600;
     color: #00bfff;
+    text-align: center;
 }
 
-.message{
+.message {
     margin-top: -7px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .message,
@@ -142,6 +189,17 @@ main .main_container .logo img {
     outline: 0;
     border: 1px solid rgba(105, 105, 105, 0.397);
     border-radius: 10px;
+    font-family: 'Cairo', sans-serif;
+}
+
+.form select.input{
+    font-size: 15px;
+    color: rgb(80, 80, 80);
+}
+
+.form select option{
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
 }
 
 .form .input+span {

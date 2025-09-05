@@ -14,6 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $first_name = $_POST['first_name'];
     $last_name  = $_POST['last_name'];
     $email      = $_POST['email'];
+    $educational_level = $_POST['educational_level'];
+    $age      = $_POST['age'];
     $password   = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
@@ -121,6 +123,21 @@ $conn->close();
                 </div>
 
                 <div class="form_container">
+                    <div class="steps">
+                        <div class="step active">
+                            <div class="number">1</div>
+                            <p>معلومات المستخدم .</p>
+                        </div>
+                        <div class="step">
+                            <div class="number">2</div>
+                            <p>أختبار أنماط التعلم .</p>
+                        </div>
+                        <div class="step">
+                            <div class="number">3</div>
+                            <p>إكتشاف إهتماماتك .</p>
+                        </div>
+                    </div>
+
                     <form class="form" action="" method="POST">
                         <p class="title">تسجيل جديد</p>
                         <p class="message">سجل الآن واحصل على وصول كامل إلى التطبيق.</p>
@@ -132,12 +149,25 @@ $conn->close();
                         </div>
 
                         <input class="input" type="email" name="email" placeholder="البريد الإلكتروني" required>
+
+                        <div class="flex">
+                            <select class="input" id="education" name="educational_level" required>
+                                <option value="" disabled selected>اختر مستواك التعليمي</option>
+                                <option value="prep">متم للشهادة الإعدادية</option>
+                                <option value="secondary">متم للشهادة الثانوية</option>
+                                <option value="college">الجامعة / الكلية</option>
+                            </select>
+
+                            <input class="input" type="number" name="age" placeholder="أدخل عمرك" required>
+                        </div>
+
+
                         <input class="input" type="password" name="password" placeholder="كلمة المرور" required>
                         <input class="input" type="password" name="confirm_password" placeholder="تأكيد كلمة المرور" required>
                         <button class="submit">انشاء الحساب</button>
 
 
-                        <p class="signin"> <a href="signin.php"> تسجيل الدخول</a></p>
+                        <p class="signin" style="display: flex;justify-content: center; gap: 1rem;">هل لديك حساب ؟ <a href="signin.php"> تسجيل الدخول</a></p>
                     </form>
                 </div>
             </div>
