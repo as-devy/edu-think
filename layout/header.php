@@ -61,6 +61,8 @@
 
             </nav>
 
+            <a href="./logout.php" style="color: red;">Logout</a>
+            
             <div class="header-actions">
                 <button class="header-action-btn" aria-label="فتح القائمة" data-nav-toggler>
                     <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
